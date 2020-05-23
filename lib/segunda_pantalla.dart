@@ -1,23 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:holasoftware/database.dart';
-import 'database.dart';
+import 'package:holasoftware/database2.dart';
+import 'database2.dart';
 import 'main.dart';
 lengDatabase db = lengDatabase();
-List<String> _lenguaje=[];
 inter i = inter();
-class segunda_pantalla extends StatelessWidget{
+class segunda_pantalla  extends StatelessWidget{
+  String sql;
+
+  segunda_pantalla(this.sql);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text("sintaxis basica"),
       ),
       body:FutureBuilder(
         future: db.initDB(),
         builder: (BuildContext, snapshot){
           if(snapshot.connectionState== ConnectionState.done){
-            return _datos(i.sql, context);
+            return _datos(context);
           }else{
             return  Center(
               child: RaisedButton(
@@ -32,14 +35,16 @@ class segunda_pantalla extends StatelessWidget{
       )
     );
   }
-  _datos(String sql, BuildContext context){
+  _datos(BuildContext context){
     return FutureBuilder(
         future: db.getDatabase(sql),
         builder: (BuildContext context, AsyncSnapshot<List<lenguaje>> snapshot){
+          print(snapshot.hasData);
+          print(snapshot.data);
           if(snapshot.hasData){
             return ListView(
               children: <Widget>[
-                for (lenguaje len in snapshot.data) ListTile(title: Text(sql))
+                for (lenguaje len in snapshot.data) ListTile(title:Text(len.nombre))
               ],
             );
           }else{
@@ -50,11 +55,7 @@ class segunda_pantalla extends StatelessWidget{
         },
     );
   }
-  consulta(String sql){
-    if(sql.length>1){
-      return db.getDatabase(sql);
-    }else{
-      return db.getAllDatabase(sql);
-    }
-  }
+
+
 }
+

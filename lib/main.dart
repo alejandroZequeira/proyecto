@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:holasoftware/menu_appbar.dart';
 import 'segunda_pantalla.dart';
-import 'package:holasoftware/database.dart';
+import 'package:holasoftware/database2.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       drawer:Drawer(
-        child: m.menu()
+        child: m.menu(context)
       ),
       body: Center(
         child: inter()
@@ -51,10 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 class inter extends StatelessWidget{
-  String sql;
   @override
   Widget build(BuildContext context) {
-      segunda_pantalla s = new segunda_pantalla();
+
       return Center(child: Container(
           alignment: Alignment.center,
            child: Column(
@@ -64,8 +63,7 @@ class inter extends StatelessWidget{
                   children: <Widget>[
                     IconButton(
                       icon: Image.asset('recursos/iconoCiclo.png'),onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>s));
-                      sql="ciclo";
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>segunda_pantalla("ciclo")));
                     }, iconSize: 90,
                     ),
                     Container(
@@ -77,8 +75,7 @@ class inter extends StatelessWidget{
                     children: <Widget>[
                       IconButton(
                         icon: Image.asset('recursos/iconoCondicion.png'),onPressed: (){
-                          sql="condicional";
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>s));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>segunda_pantalla("condicional")));
                       }, iconSize: 90,
                       ),
                       Container(
@@ -89,8 +86,7 @@ class inter extends StatelessWidget{
                     children: <Widget>[
                       IconButton(
                         icon: Image.asset('recursos/iconoEntrada.png'),onPressed: (){
-                          sql="entrada";
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>s));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>segunda_pantalla("entrada")));
                       }, iconSize: 90,
                       ),
                       Container(
@@ -104,8 +100,7 @@ class inter extends StatelessWidget{
                      children: <Widget>[
                      IconButton(
                      icon: Image.asset('recursos/iconoSalida.png'),onPressed: (){
-                       sql="salida";
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>s));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>segunda_pantalla("salida")));
                      }, iconSize: 90,
                      ),
                        Container(
@@ -116,8 +111,7 @@ class inter extends StatelessWidget{
                      children: <Widget>[
                        IconButton(
                          icon: Image.asset('recursos/iconoSintaxis.png'),onPressed: (){
-                           sql="sintaxis";
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=>s));
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>segunda_pantalla("sintaxis")));
                        }, iconSize: 90,
                        ),
                        Container(
